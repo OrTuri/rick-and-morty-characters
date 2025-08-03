@@ -1,0 +1,110 @@
+<div class="form-overlay" 
+     (click)="onOverlayClick($event)" 
+     (keydown.escape)="onClose()"
+     tabindex="0"
+     role="dialog"
+     aria-modal="true"
+     [attr.aria-label]="editingCharacter() ? 'Edit Character Dialog' : 'Create New Character Dialog'">
+  <div class="form-container">
+    <div class="form-header">
+      <h2>{{ editingCharacter() ? 'Edit Character' : 'Create New Character' }}</h2>
+      <button class="close-btn" 
+              (click)="onClose()" 
+              (keydown.enter)="onClose()"
+              (keydown.space)="onClose()"
+              type="button"
+              aria-label="Close dialog">&times;</button>
+    </div>
+    
+    <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="character-form">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name"
+          class="form-control"
+          [class.error]="characterForm.get('name')?.invalid && characterForm.get('name')?.touched"
+          autocomplete="name">
+        <div class="error-message" *ngIf="characterForm.get('name')?.errors?.['required'] && characterForm.get('name')?.touched">
+          Name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="status">Status *</label>
+        <select 
+          id="status" 
+          formControlName="status"
+          class="form-control">
+          <option value="Alive">Alive</option>
+          <option value="Dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="species">Species *</label>
+        <input 
+          type="text" 
+          id="species" 
+          formControlName="species"
+          class="form-control"
+          [class.error]="characterForm.get('species')?.invalid && characterForm.get('species')?.touched"
+          autocomplete="off">
+        <div class="error-message" *ngIf="characterForm.get('species')?.errors?.['required'] && characterForm.get('species')?.touched">
+          Species is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="gender">Gender *</label>
+        <select 
+          id="gender" 
+          formControlName="gender"
+          class="form-control">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Genderless">Genderless</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input 
+          type="text" 
+          id="type" 
+          formControlName="type"
+          class="form-control"
+          autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label for="image">Image URL *</label>
+        <input 
+          type="url" 
+          id="image" 
+          formControlName="image"
+          class="form-control"
+          [class.error]="characterForm.get('image')?.invalid && characterForm.get('image')?.touched"
+          autocomplete="url"
+          placeholder="https://example.com/image.jpg">
+        <div class="error-message" *ngIf="characterForm.get('image')?.invalid && characterForm.get('image')?.touched">
+          <span *ngIf="characterForm.get('image')?.errors?.['required']">Image URL is required</span>
+          <span *ngIf="characterForm.get('image')?.errors?.['invalidUrl']">Please enter a valid URL starting with http:// or https://</span>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn btn-cancel" (click)="onClose()">Cancel</button>
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="characterForm.invalid || isSubmitting()">
+          {{ isSubmitting() ? 'Saving...' : (editingCharacter() ? 'Update' : 'Create') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
