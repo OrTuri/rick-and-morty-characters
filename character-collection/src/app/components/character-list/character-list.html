@@ -1,0 +1,26 @@
+<div class="character-list" *ngIf="characters().length > 0; else noCharacters">
+  <div class="list-header" *ngIf="title()">
+    <h2>{{ title() }}</h2>
+    <span class="count">{{ characters().length }} character{{ characters().length !== 1 ? 's' : '' }}</span>
+  </div>
+  
+  <div class="characters-grid">
+    <app-character-card
+      *ngFor="let character of characters(); trackBy: trackByCharacterId"
+      [character]="character"
+      (toggleFavorite)="onToggleFavorite($event)"
+      (editCharacter)="onEditCharacter($event)"
+      (deleteCharacter)="onDeleteCharacter($event)">
+    </app-character-card>
+  </div>
+</div>
+
+<ng-template #noCharacters>
+  <div class="no-characters">
+    <div class="no-characters-content">
+      <div class="icon">🔍</div>
+      <h3>{{ emptyMessage() || 'No characters found' }}</h3>
+      <p>{{ emptySubMessage() || 'Try adjusting your search or create a new character.' }}</p>
+    </div>
+  </div>
+</ng-template>

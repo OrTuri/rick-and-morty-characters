@@ -1,0 +1,264 @@
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.app-title {
+  margin: 0;
+  
+  .title-main {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    display: block;
+  }
+  
+  .title-sub {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+    display: block;
+    margin-top: -4px;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.main-content {
+  padding: 32px 0;
+}
+
+.controls-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  position: relative;
+  margin-bottom: 24px;
+  
+  .search-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    
+    &:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    &::placeholder {
+      color: #999;
+    }
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #999;
+    pointer-events: none;
+  }
+}
+
+.view-toggles {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: #666;
+  
+  &:hover {
+    border-color: #667eea;
+    color: #667eea;
+  }
+  
+  &.active {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+  }
+}
+
+.content-area {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  p {
+    margin-top: 16px;
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  text-align: center;
+  padding: 40px;
+  
+  p {
+    color: #dc3545;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  
+  &.btn-primary {
+    background: #667eea;
+    color: white;
+    
+    &:hover {
+      background: #5a67d8;
+      transform: translateY(-1px);
+    }
+  }
+  
+  &.btn-secondary {
+    background: #6c757d;
+    color: white;
+    
+    &:hover {
+      background: #5a6268;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 16px 0;
+    
+    .container {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+  
+  .app-title {
+    text-align: center;
+    
+    .title-main {
+      font-size: 1.75rem;
+    }
+  }
+  
+  .controls-section {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .content-area {
+    padding: 24px 20px;
+  }
+  
+  .view-toggles {
+    justify-content: center;
+  }
+  
+  .toggle-btn {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .main-content {
+    padding: 20px 0;
+  }
+  
+  .controls-section {
+    padding: 16px;
+  }
+  
+  .content-area {
+    padding: 20px 16px;
+  }
+  
+  .view-toggles {
+    flex-direction: column;
+  }
+  
+  .toggle-btn {
+    flex: none;
+  }
+}

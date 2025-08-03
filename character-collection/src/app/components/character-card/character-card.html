@@ -1,0 +1,45 @@
+<div class="character-card" [class.favorite]="character().isFavorite">
+  <div class="card-header">
+    <img [src]="character().image" [alt]="character().name" class="character-image">
+    <button 
+      class="favorite-btn"
+      (click)="onToggleFavorite()"
+      [class.active]="character().isFavorite"
+      aria-label="Toggle favorite">
+      <span class="heart">♥</span>
+    </button>
+  </div>
+  
+  <div class="card-content">
+    <h3 class="character-name">{{ character().name }}</h3>
+    
+    <div class="character-info">
+      <div class="info-row">
+        <span class="label">Status:</span>
+        <span class="status" [class]="character().status.toLowerCase()">
+          {{ character().status }}
+        </span>
+      </div>
+      
+      <div class="info-row">
+        <span class="label">Species:</span>
+        <span>{{ character().species }}</span>
+      </div>
+      
+      <div class="info-row">
+        <span class="label">Gender:</span>
+        <span>{{ character().gender }}</span>
+      </div>
+      
+      <div class="info-row" *ngIf="character().origin?.name">
+        <span class="label">Origin:</span>
+        <span>{{ character().origin.name }}</span>
+      </div>
+    </div>
+    
+    <div class="card-actions" *ngIf="character().isCustom">
+      <button class="btn btn-edit" (click)="onEdit()">Edit</button>
+      <button class="btn btn-delete" (click)="onDelete()">Delete</button>
+    </div>
+  </div>
+</div>

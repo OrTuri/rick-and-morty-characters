@@ -1,0 +1,156 @@
+.character-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &.favorite {
+    border: 2px solid #ff6b6b;
+  }
+}
+
+.card-header {
+  position: relative;
+  
+  .character-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    
+    .heart {
+      font-size: 20px;
+      color: #ccc;
+      transition: color 0.2s ease;
+    }
+    
+    &:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    
+    &.active .heart {
+      color: #ff6b6b;
+    }
+  }
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.character-name {
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.character-info {
+  margin: 12px 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  
+  .label {
+    font-weight: 500;
+    color: #666;
+  }
+  
+  .status {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    
+    &.alive {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    &.dead {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    &.unknown {
+      background: #fff3cd;
+      color: #856404;
+    }
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &.btn-edit {
+    background: #007bff;
+    color: white;
+    
+    &:hover {
+      background: #0056b3;
+    }
+  }
+  
+  &.btn-delete {
+    background: #dc3545;
+    color: white;
+    
+    &:hover {
+      background: #c82333;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .character-card {
+    margin-bottom: 16px;
+  }
+  
+  .card-content {
+    padding: 12px;
+  }
+  
+  .character-name {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,61 @@
+<div class="app">
+  <header class="app-header">
+    <div class="container">
+      <h1 class="app-title">
+        <span class="title-main">Rick & Morty</span>
+        <span class="title-sub">Character Collection</span>
+      </h1>
+      <div class="header-actions">
+        <button class="btn btn-primary" (click)="openCreateForm()">Create Character</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="controls-section">
+        <div class="search-bar">
+          <input type="text" placeholder="Search characters..." 
+                 [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)"
+                 (input)="onSearch()" class="search-input">
+          <span class="search-icon">🔍</span>
+        </div>
+        
+        <div class="view-toggles">
+          <button class="toggle-btn" [class.active]="currentViewValue === 'all'" (click)="setView('all')">
+            All Characters ({{ characterService.allCharacters().length }})
+          </button>
+          <button class="toggle-btn" [class.active]="currentViewValue === 'favorites'" (click)="setView('favorites')">
+            Favorites ({{ characterService.favoriteCharacters().length }})
+          </button>
+          <button class="toggle-btn" [class.active]="currentViewValue === 'custom'" (click)="setView('custom')">
+            My Characters ({{ characterService.customCharacters().length }})
+          </button>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div class="loading-spinner" *ngIf="characterService.loading()">
+          <div class="spinner"></div>
+          <p>Loading characters...</p>
+        </div>
+
+        <div class="error-message" *ngIf="characterService.error()">
+          <p>{{ characterService.error() }}</p>
+          <button class="btn btn-secondary" (click)="retry()">Try Again</button>
+        </div>
+
+        <app-character-list *ngIf="!characterService.loading() && !characterService.error()"
+          [characters]="displayedCharacters()" [title]="getViewTitle()"
+          [emptyMessage]="getEmptyMessage()" [emptySubMessage]="getEmptySubMessage()"
+          (toggleFavorite)="onToggleFavorite($event)" (editCharacter)="onEditCharacter($event)"
+          (deleteCharacter)="onDeleteCharacter($event)">
+        </app-character-list>
+      </div>
+    </div>
+  </main>
+
+  <app-character-form *ngIf="showFormValue" [editingCharacter]="editingCharacterValue"
+    (submitForm)="onSubmitForm($event)" (closeForm)="closeForm()">
+  </app-character-form>
+</div>
